@@ -356,13 +356,28 @@
                                     </div>
                                 </div>
                                 <code class="method-charge d-none"></code>
-                                <div class="cal-bottom-area">
+                                <!-- <div class="cal-bottom-area">
                                     <div class="profit-cal">
                                         <div class="profit-cal__button">
                                             <a href="https://t.me/Mr_Fahd_Al_Qahtani"
                                                 class="btn btn--base pill outline outlineinvestModal">استثمر الآن</a>
                                         </div>
                                     </div>
+                                </div> -->
+                                <div class="cal-bottom-area">
+                                    <div class="profit-cal">
+                                        <div class="profit-cal__button">
+                                            <a href="#" class="btn btn--base pill outline outlineinvestModal" onclick="openPopup()">استثمر الآن</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="overlay" id="overlay" onclick="closePopup()"></div>
+                                <div class="popup" id="popup">
+                                    <img src="payment.jpg" alt="استثمار" class="popup-image">
+                                    <p class="pppp">أرسل المبلغ ,وأرسل لي لقطة شاشة وتواصل معي عبر تيليجرام:</p>
+                                    <br>
+                                    <a href="https://t.me/Mr_Fahd_Al_Qahtani" target="_blank" class="btn btn--base">فتح التليغرام</a>
+                                    <button class="close-btn" onclick="closePopup()">إغلاق</button>
                                 </div>
                             </form>
                         </div>
@@ -389,7 +404,7 @@
                             <li class="plan-item__list-inner"> - تدفع راس مال 7000 الربح اليومي 3400 ريال </li>
 
 
-                            <a href="https://t.me/Mr_Fahd_Al_Qahtani"
+                            <a href="#investment"
                                 class="btn btn--base pill outline outlineinvestModal">استثمر الآن</a>
                         </div>
                     </div>
@@ -408,7 +423,7 @@
                             <li class="plan-item__list-inner"> - تدفع راس مال 15000 الربح اليومي 5750 درهم </li>
 
 
-                            <a href="https://t.me/Mr_Fahd_Al_Qahtani"
+                            <a href="#investment"
                                 class="btn btn--base pill outline outlineinvestModal">استثمر الآن</a>
                         </div>
                     </div>
@@ -427,7 +442,7 @@
                             <li class="plan-item__list-inner">- تدفع راس مال 1230 دينار الربح اليومي400 دينار </li>
 
 
-                            <a href="https://t.me/Mr_Fahd_Al_Qahtani"
+                            <a href="#investment"
                                 class="btn btn--base pill outline outlineinvestModal">استثمر الآن</a>
                         </div>
                     </div>
@@ -766,8 +781,64 @@
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/main.js"></script>
+<script>
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+    }
 
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
 
+<style>
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        z-index: 1000;
+        text-align: center;
+        width: 300px;
+    }
+    .popup-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    .close-btn {
+        background: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+   
+    }
+    .pppp{
+        color: black;
+    }
+</style>
 
 
 </body>
