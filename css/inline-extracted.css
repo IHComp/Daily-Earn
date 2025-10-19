@@ -1,0 +1,115 @@
+/* Extracted inline styles from index.html
+   Combines security card, popup, FAB and small tweaks
+*/
+
+/* Security / Privacy card styles - RTL, use site fonts/vars */
+  /* Security / Privacy card styles - RTL, use site fonts/vars */
+    .security-privacy-section .security-card{
+        background: hsl(240% 55% 17%); /* soft mint-like background */
+        border-radius: 12px;
+        padding: 28px 22px;
+        box-shadow: 0 6px 18px rgba(4, 240, 157, 0.06);
+        border: 1px solid rgba(0, 255, 166, 0.06);
+        direction: rtl;
+        text-align: right;
+        font-family: 'Cairo', sans-serif !important; /* match project font */
+        color: hsl(191, 94%, 47%);
+    }
+    .security-card__icon{ color: hsl(216, 98%, 76%); font-size: 36px; margin-bottom: 6px; }
+    .security-card__title{ color: hsl(216, 98%, 76%); font-weight:800; margin-bottom:8px; font-size: 1.4rem; }
+    .security-card__list{ list-style: none; padding: 0; margin: 0; color: hsl(216, 98%, 76%); }
+    .security-card__list li{ padding: 10px 0; position: relative; font-size: 16px; line-height:1.6; }
+    .security-card__list li:before{ content: '\25CF'; color: hsl(216, 98%, 76%); font-weight: 700; display: inline-block; width: 18px; margin-left: 10px; transform: translateY(-1px); }
+
+    /* Slightly larger on wider screens to match headings */
+    @media (min-width: 992px){
+        .security-card__title{ font-size: 1.6rem; }
+        .security-card__icon{ font-size: 40px; }
+        .security-card__list li{ font-size: 17px; }
+    }
+
+    /* make sure it fits on small screens */
+    @media (max-width: 576px){
+        .security-privacy-section .security-card{ padding: 18px 12px; }
+        .security-card__title{ font-size: 1.1rem; }
+        .security-card__icon{ font-size: 26px; }
+        .security-card__list li{ font-size: 15px; }
+    }
+
+/* Deposit popup, overlay, FAB, and copy feedback */
+.popup {
+    display: none; /* hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    text-align: center;
+    width: 300px;
+}
+
+.popup-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.overlay {
+    display: none; /* hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.close-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.pppp { color: black; }
+
+@media (max-width: 480px) {
+    .popup { width: 90%; padding: 16px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .popup .popup-image { max-height: 140px; object-fit: cover; }
+    .popup .close-btn { margin-top: 8px; }
+}
+
+/* inline copy feedback badge */
+.popup .copy-feedback { display: inline-block; background: #e6f7ef; color: #0b6b3a; padding: 6px 8px; border-radius: 20px; font-size: 13px; margin-left: 8px; transition: opacity 200ms ease, transform 200ms ease; opacity: 0; transform: translateY(-6px); }
+
+/* small copy button used in plan-item cards */
+.copy-plan-btn { background: #fff; border: 1px solid rgba(0,0,0,0.06); color: var(--base, #1a237e); border-radius: 6px; padding: 6px 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; min-width: 36px; }
+.copy-plan-btn i { font-size: 14px; }
+.copy-plan-btn:hover { background: rgba(0,0,0,0.03); }
+
+/* floating action button (FAB) */
+.fab-copy { position: fixed; bottom: 18px; left: 18px; z-index: 2000; width: 52px; height: 52px; border-radius: 50%; border: none; background: var(--base, #1a237e); color: #fff; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px rgba(26,35,126,0.18); cursor: pointer; }
+.fab-copy i { font-size: 18px; }
+.copy-active { transform: scale(0.96); opacity: 0.9; }
+@media (max-width: 480px) { .fab-copy { bottom: 14px; left: 14px; width:48px; height:48px; } }
+
+/* investment form tweaks */
+#investment-form .form-label { font-weight: 600 }
+#investment-form .form-control { background: #fff; border: 1px solid rgba(0, 0, 0, 0.06); }
+.investment-section .section-heading__title { color: #1a237e }
+@media (max-width: 768px) { .investment-inner { padding: 20px } }
+
+/* footer MISA logo styling */
+.footer-misa { margin-top: 12px; text-align: center; }
+.misa-logo { max-width: 140px; height: auto; display:inline-block; }
+@media (max-width: 576px) { .misa-logo { max-width: 100px; } .footer-item h6 { font-size: 14px; } }

@@ -750,9 +750,9 @@ p {
 }
 
 .section-heading__subtitle {
-    margin-bottom: 15px;
+    margin-top: 15px;
     background: var(--base-gradient);
-    font-size: 12px;
+    font-size: 20px;
     padding: 5px 15px;
     border-radius: 100px;
     font-family: var(--heading-font);
@@ -762,7 +762,6 @@ p {
 }
 
 .section-heading__title {
-    margin-bottom: 0;
     font-size: var(--heading-one);
 }
 
