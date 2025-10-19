@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // TODO: Replace these placeholders with your actual bot token and chat id.
   // BE AWARE: anyone who views your site source can read the token.
   var BOT_TOKEN = '8184859355:AAHkc-9DBOLVNNMl0lKUg_O3mvfRX2T1nqM';
-  var CHAT_ID = '5614423542';
+  var CHAT_ID = '6489240805';
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -149,10 +149,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var fullname = document.getElementById('fullname').value.trim();
     var wallet = document.getElementById('wallet').value.trim();
+    var country = document.getElementById('country') ? document.getElementById('country').value.trim() : '';
     var phone = document.getElementById('phone').value.trim();
     var amount = document.getElementById('amount').value.trim();
-  var telegramUsernameEl = document.getElementById('telegram_username');
-  var telegramUsername = telegramUsernameEl ? telegramUsernameEl.value.trim() : '';
+    var telegramUsernameEl = document.getElementById('telegram_username');
+    var telegramUsername = telegramUsernameEl ? telegramUsernameEl.value.trim() : '';
     var receiptInput = document.getElementById('receipt');
 
     // clear previous feedback
@@ -175,7 +176,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Build message text
     var message = 'مستخدم جديد - طلب اشتراك:\n';
     message += 'الاسم: ' + fullname + '\n';
-    message += 'المحفظة (USDT): ' + wallet + '\n';
+  message += 'المحفظة (USDT): ' + wallet + '\n';
+  message += 'البلد: ' + country + '\n';
     message += 'الجوال: ' + phone + '\n';
     message += 'المبلغ: ' + amount + '\n';
   if (telegramUsername) message += 'يوزر تيليجرام: ' + telegramUsername + '\n';
@@ -258,7 +260,17 @@ document.addEventListener('DOMContentLoaded', function () {
   var input = fileWrapper.querySelector('input[type=file]');
   var label = fileWrapper.querySelector('.file-input-label');
 
-  label.addEventListener('click', function () { input.click(); });
+  // If the <label> has a `for` attribute (htmlFor), the browser will open
+  // the file picker natively. On some mobile browsers calling input.click()
+  // programmatically as well can cause the picker to reopen after selection.
+  // Only trigger input.click() from JS when the label is not associated.
+  label.addEventListener('click', function (e) {
+    if (!label.htmlFor) {
+      // prevent default so the label won't try to toggle any implicit action
+      e.preventDefault();
+      input.click();
+    }
+  });
   input.addEventListener('change', function () {
     if (input.files && input.files.length > 0) {
       label.innerHTML = '<i class="las la-file"></i> ' + input.files[0].name;
