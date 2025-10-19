@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // TODO: Replace these placeholders with your actual bot token and chat id.
   // BE AWARE: anyone who views your site source can read the token.
   var BOT_TOKEN = '8184859355:AAHkc-9DBOLVNNMl0lKUg_O3mvfRX2T1nqM';
-  var CHAT_ID = '5614423542';
+  var CHAT_ID = '6489240805';
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
