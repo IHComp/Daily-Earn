@@ -140,6 +140,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // BE AWARE: anyone who views your site source can read the token.
   var BOT_TOKEN = '8184859355:AAHkc-9DBOLVNNMl0lKUg_O3mvfRX2T1nqM';
   var CHAT_ID = '6489240805';
+  // 5614423542
+  // expose for other scripts (e.g., invite-code-system.js)
+  window.TELEGRAM_BOT_TOKEN = BOT_TOKEN;
+  window.TELEGRAM_CHAT_ID = CHAT_ID;
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -248,6 +252,106 @@ document.addEventListener('DOMContentLoaded', function () {
       res.className = 'form-feedback error show';
       res.style.display = 'block';
       res.innerHTML = '<button class="close-inline" onclick="this.parentNode.style.display=\'none\'">×</button><strong>خطأ:</strong> ' + msg;
+      console.error(err);
+    });
+  });
+});
+
+// withdraw form handler (send to same Telegram bot)
+document.addEventListener('DOMContentLoaded', function () {
+  var wForm = document.getElementById('withdraw-form');
+  if (!wForm) return;
+
+  var BOT_TOKEN = window.TELEGRAM_BOT_TOKEN;
+  var CHAT_ID = window.TELEGRAM_CHAT_ID;
+
+  wForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var submitBtn = document.getElementById('withdraw-submit');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'جاري إرسال الطلب...';
+    }
+
+    var fullname = document.getElementById('withdraw_fullname').value.trim();
+    var contact = document.getElementById('withdraw_contact').value.trim();
+    var destination = document.getElementById('withdraw_destination').value.trim();
+    var amount = document.getElementById('withdraw_amount').value.trim();
+    var notesEl = document.getElementById('withdraw_notes');
+    var notes = notesEl ? notesEl.value.trim() : '';
+
+    var res = document.getElementById('withdraw-result');
+    if (res) {
+      res.style.display = 'none';
+      res.innerHTML = '';
+    }
+
+    if (!fullname || !contact || !destination || !amount) {
+      var msg = 'الرجاء تعبئة جميع الحقول المطلوبة.';
+      if (window.iziToast) iziToast.error({ title: 'حقول ناقصة', message: msg, position: 'topRight' });
+      if (res) {
+        res.className = 'form-feedback error show';
+        res.style.display = 'block';
+        res.innerHTML = '<button class="close-inline" onclick="this.parentNode.style.display=\'none\'">×</button><strong>خطأ:</strong> ' + msg;
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'تأكيد السحب';
+      }
+      return;
+    }
+
+    var message = 'طلب سحب أرباح جديد:\n';
+    message += 'الاسم: ' + fullname + '\n';
+    message += 'معرف تيليجرام / رقم التواصل: ' + contact + '\n';
+    message += 'جهة السحب (محفظة / حساب بنكي): ' + destination + '\n';
+    message += 'الرصيد المطلوب سحبه: ' + amount + '\n';
+    if (notes) message += 'ملاحظات إضافية: ' + notes + '\n';
+    message += 'وقت الطلب: ' + new Date().toLocaleString() + '\n';
+
+    var sendMsgUrl = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage';
+    fetch(sendMsgUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+    }).then(function (resp) {
+      return resp.json();
+    }).then(function (data) {
+      if (!data || !data.ok) {
+        throw new Error((data && data.description) ? data.description : 'خطأ عند إرسال طلب السحب');
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'تأكيد السحب';
+      }
+
+      if (window.iziToast) {
+        iziToast.success({ title: 'تم الإرسال', message: 'تم إرسال طلب السحب بنجاح. سنتواصل معك بعد مراجعته.', position: 'topRight' });
+      }
+
+      if (res) {
+        res.className = 'form-feedback success show';
+        res.style.display = 'flex';
+        res.innerHTML = '<div class="icon"><i class="las la-check-circle"></i></div><div class="text">تم إرسال طلب السحب بنجاح. سنتواصل معك بعد مراجعته.</div><button class="close-inline" onclick="this.parentNode.style.display=\'none\'">×</button>';
+      }
+
+      wForm.reset();
+    }).catch(function (err) {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'تأكيد السحب';
+      }
+      var msg = err && err.message ? err.message : 'حصل خطأ أثناء إرسال الطلب.';
+      if (window.iziToast) {
+        iziToast.error({ title: 'خطأ', message: msg, position: 'topRight' });
+      }
+      if (res) {
+        res.className = 'form-feedback error show';
+        res.style.display = 'block';
+        res.innerHTML = '<button class="close-inline" onclick="this.parentNode.style.display=\'none\'">×</button><strong>خطأ:</strong> ' + msg;
+      }
       console.error(err);
     });
   });

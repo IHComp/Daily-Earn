@@ -763,6 +763,38 @@ p {
 
 .section-heading__title {
     font-size: var(--heading-one);
+    color: #2a2f45;
+    background: linear-gradient(135deg, #5f72ff 0%, #7a21ff 45%, #00f5a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    position: relative;
+    padding-right: 36px;
+}
+
+.section-heading__title::after {
+    content: "\f00c"; /* la-check-circle */
+    font-family: "Line Awesome Free";
+    font-weight: 900;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00f5a0;
+    font-size: 20px;
+    background: rgba(0, 245, 160, 0.1);
+    border-radius: 50%;
+    padding: 6px;
+    box-shadow: 0 6px 16px rgba(0, 245, 160, 0.25);
+}
+
+/* منع تعارض أيقونة العنوان مع النمط الثالث الذي يستخدم ::before للخط */
+.section-heading.style-three .section-heading__title {
+    padding-right: 0;
+}
+.section-heading.style-three .section-heading__title::after {
+    display: none;
 }
 
 .section-heading__desc {
