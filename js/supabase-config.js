@@ -1,9 +1,7 @@
-// Supabase project configuration
-// استبدل القيم أدناه ببيانات مشروعك من Supabase Dashboard (Settings → API)
+// بدّل هذا الملف عن supabase-config.js
+// ضع الـ URL بعد نشر الـ Apps Script
 (function (w) {
-    w.SUPABASE_CONFIG = {
-        url: 'https://prwtqfqclkyfdsajamwz.supabase.co', // Project URL
-        anonKey: 'sb_publishable_Qg__OJQBFo4kvIQHhDKWbA_ZVbBQatt'   // anon/public key
-    };
+   w.GAS_CONFIG = {
+    url: 'https://script.google.com/macros/s/AKfycbxz_6CMfJGfWf8tx0JbISFUB9rtRVJ3-BZlyrYz7_1RLdoFoWSK6geqTTqHyqi8cVQLWQ/exec'
+};
 })(window);
-
